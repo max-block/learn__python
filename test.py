@@ -1,27 +1,26 @@
-from typing import List, Type, TypeVar
+def check_auth(f):
+    def wrapper(*args):
+        print("0", args[0])
+        print("1", args[1])
+        return f(*args)
 
-T = TypeVar("T", bound="Base")
-
-
-class Base2:
-    var2 = []
-
-    @classmethod
-    def fun1(cls, data) -> List[T]:
-        cls.var2.append(1)
+    return wrapper
 
 
-class Base:
-    var1 = []
+class TelegramBot:
+    @check_auth
+    def cmd1_handler(self, login: str, password: str):
+        pass
 
-    @classmethod
-    def fun1(cls: Type[T]) -> List[T]:
-        cls.var1.append(1)  # Pycharm тут не видит, что у cls есть var1
-        return [cls(), cls()]
-
-
-class A(Base):
-    pass
+    @check_auth
+    def cmd2_handler(self, login: str, password: str):
+        pass
 
 
-print(A.fun1())  # -- список объектов класса A
+def main():
+    tb = TelegramBot()
+    tb.cmd1_handler("u1", "p1")
+
+
+if __name__ == "__main__":
+    main()
