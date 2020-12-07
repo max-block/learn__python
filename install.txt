@@ -1,0 +1,8 @@
+--> Install python3.9 on Ubuntu 20.04
+apt update \
+    && apt install software-properties-common -y \
+    && add-apt-repository ppa:deadsnakes/ppa \
+    && apt install python3.9 -y \
+    && apt install python3.9-venv -y
+
+
